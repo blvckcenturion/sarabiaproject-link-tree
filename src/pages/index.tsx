@@ -60,15 +60,15 @@ export default function Home() {
     
     switch (geometry) {
       case "cone":
-        return <coneBufferGeometry attach="geometry" args={[1, 1, 32]} />
+        return <coneGeometry attach="geometry" args={[1, 1, 32]} />
       case "dodecahedron":
-        return <dodecahedronBufferGeometry attach="geometry" args={[1, 0]} />
+        return <dodecahedronGeometry attach="geometry" args={[1, 0]} />
       case "icosahedron":
-        return <icosahedronBufferGeometry attach="geometry" args={[1, 0]} />
+        return <icosahedronGeometry attach="geometry" args={[1, 0]} />
       case "octahedron":
-        return <octahedronBufferGeometry attach="geometry" args={[1, 0]} />
+        return <octahedronGeometry attach="geometry" args={[1, 0]} />
       case "tetrahedron":
-        return <tetrahedronBufferGeometry attach="geometry" args={[1, 0]} />
+        return <tetrahedronGeometry attach="geometry" args={[1, 0]} />
     }
 
   }
