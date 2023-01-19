@@ -134,7 +134,7 @@ body {
 
 .action {
   position: absolute;
-  top: 75%;
+  top: 80%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 20vh;
@@ -150,8 +150,14 @@ body {
   cursor: pointer;
   font-size: 1rem;
   font-weight: 600;
-  transition: all 0.3s ease;
+  transition: all 1s ease;
   background-color: transparent;
   border: 2px solid;
   font-family: 'Roboto Mono', monospace;
+}
+
+.action button:hover {
+  color: #000;
+  background-color: #fff;
+  border-color: #fff;
 }

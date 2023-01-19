@@ -20,6 +20,8 @@ export default function Home() {
 
   const [matcap, setMatcap] = useState<any>(null)
 
+  const [showLinks, setShowLinks] = useState(false)
+
 
   useEffect(() => {
 
@@ -27,9 +29,9 @@ export default function Home() {
       if ((width * height) / 500 > 2000) {
         setTextSize(0.00025 * (width * height) / 1000)
       } else if ((width * height) / 500 > 1500) { 
-        setTextSize(0.00025 * (width * height)/500)
+        setTextSize(0.00025 * (width * height)/400)
       } else {
-        setTextSize(0.00025 * (width * height)/300) 
+        setTextSize(0.00025 * (width * height)/200) 
       }
     }
     
@@ -46,8 +48,14 @@ export default function Home() {
   const generatePosition = () => { 
     let pos = new THREE.Vector3(Math.random() * 20 - 10, Math.random() * 20 - 10, Math.random() * 20 - 10)
 
-    while (pos.x < 2 && pos.x > -2 && pos.y < 2 && pos.y > -2 && pos.z < 2 && pos.z > -2) {
-      pos = new THREE.Vector3(Math.random() * 20 - 10, Math.random() * 20 - 10, Math.random() * 20 - 10)
+    if (!showLinks) { 
+      while (pos.x < 2 && pos.x > -2 && pos.y < 2 && pos.y > -2 && pos.z < 2 && pos.z > -2) {
+        pos = new THREE.Vector3(Math.random() * 20 - 10, Math.random() * 20 - 10, Math.random() * 20 - 10)
+      }
+    } else {
+      while (pos.x < 4 && pos.x > -4 && pos.y < 5 && pos.y > -5 && pos.z < 4 && pos.z > -4) {
+        pos = new THREE.Vector3(Math.random() * 20 - 10, Math.random() * 20 - 10, Math.random() * 20 - 10)
+      }
     }
     
     return pos
@@ -89,19 +97,63 @@ export default function Home() {
 
   const font = new FontLoader().parse(g);
 
-  const myGeometry = new TextGeometry("SARABIA \nPROJECT", {
-    font: font,
-    size: textSize,
-    height: textSize,
-    curveSegments: 12,
-    bevelEnabled: false,
-    bevelThickness: 0.03,
-    bevelSize: 0.02,
-    bevelOffset: 0,
-    bevelSegments: 4
-  })
+  const generateTextGeometry = (text : string) => {
+      
+    const myGeometry = new TextGeometry(text, {
+      font: font,
+      size: textSize,
+      height: textSize,
+      curveSegments: 12,
+      bevelEnabled: false,
+      bevelThickness: 0.03,
+      bevelSize: 0.02,
+      bevelOffset: 0,
+      bevelSegments: 4
+    })
 
-  myGeometry.center()
+    myGeometry.center()
+
+    return myGeometry
+  }
+  
+
+  const titleGeometry = generateTextGeometry("SARABIA \nPROJECT")
+  const twitterGeometry = generateTextGeometry("TWITTER")
+  const instagramGeometry = generateTextGeometry("INSTAGRAM")
+  const youtubeGeometry = generateTextGeometry("YOUTUBE")
+  const tiktokGeometry = generateTextGeometry("TIKTOK")
+
+
+  const Index = () => {
+    return (
+      <>
+      <mesh position={[0, (width != undefined ? width > height ? 0 : 1 : 1), 0]} onClick={() => console.log('sapo')} geometry={titleGeometry}>
+        <meshMatcapMaterial matcap={matcap} />
+      </mesh>
+      </>
+    )
+  }
+
+  const Links = () => { 
+    return (
+      <>
+        <mesh position={[0, 4, 0]} onClick={() => console.log('sapo')} geometry={twitterGeometry}>
+          <meshMatcapMaterial matcap={matcap} />
+        </mesh>
+        <mesh position={[0, 2, 0]} onClick={() => console.log('sapo')} geometry={instagramGeometry}>
+          <meshMatcapMaterial matcap={matcap} />
+        </mesh>
+        <mesh position={[0, 0, 0]} onClick={() => console.log('sapo')} geometry={youtubeGeometry}>
+          <meshMatcapMaterial matcap={matcap} />
+        </mesh>
+        <mesh position={[0, -2, 0]} onClick={() => console.log('sapo')} geometry={tiktokGeometry}>
+          <meshMatcapMaterial matcap={matcap} />
+        </mesh>
+
+        
+      </>
+    )
+  }
 
 
   return (
@@ -134,19 +186,18 @@ export default function Home() {
           <spotLight intensity={0.5} angle={0.1} penumbra={1} position={[10, 15, 10]} castShadow />
           <Suspense fallback={null}>
             {/* <Model /> */}
-            <mesh position={[0, (width != undefined ? width > height ? 0 : 1 : 1), 0]} onClick={() => console.log('sapo')} geometry={myGeometry}>
-              <meshMatcapMaterial matcap={matcap} />
-            </mesh>
-            <RandomGeometries/>
+            {showLinks ? <Links /> : <Index />}
+            
             {/* To add environment effect to the model */}
             <Environment preset="city" />
+            <RandomGeometries />
           </Suspense>
-          <OrbitControls maxDistance={10} autoRotate/>
+          <OrbitControls maxDistance={10} minDistance={3} autoRotate />
         </Canvas>
       </div>
       <div className='action'>
-        <button>
-          Visita mis links.
+        <button onClick={() => setShowLinks(!showLinks)}>
+          {showLinks ? "Volver atras." : "Visita mis links."}
         </button>
       </div>
 
