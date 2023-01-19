@@ -137,7 +137,7 @@ body {
   top: 90%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 20vh;
+  width: 25vh;
   height: 8vh;
   background-color: transparent;
   z-index: 3;
@@ -152,8 +152,10 @@ body {
   font-weight: 600;
   transition: all 1s ease;
   background-color: transparent;
-  border: 2px solid;
+  border: 2px solid #fff;
+  color: #fff;
   font-family: 'Roboto Mono', monospace;
+  padding: 5px;
 }
 
 .action button:hover {
