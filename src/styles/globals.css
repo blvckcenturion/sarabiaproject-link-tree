@@ -134,11 +134,11 @@ body {
 
 .action {
   position: absolute;
-  top: 80%;
+  top: 90%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 20vh;
-  height: 5vh;
+  height: 8vh;
   background-color: transparent;
   z-index: 3;
 }

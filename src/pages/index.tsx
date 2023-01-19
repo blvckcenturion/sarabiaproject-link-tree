@@ -8,11 +8,15 @@ import { FontLoader } from "three/examples/jsm/loaders/FontLoader"
 import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry"
 import g from "../../public/assets/fonts/G-Display.json"
 import useWindowSize from 'hooks/useWindowSize'
+import { useRouter } from 'next/router'
+
 
 extend({TextGeometry})
 
 
 export default function Home() {
+
+  const router = useRouter()
 
   const { width, height } = useWindowSize()
 
@@ -137,16 +141,16 @@ export default function Home() {
   const Links = () => { 
     return (
       <>
-        <mesh position={[0, 4, 0]} onClick={() => console.log('sapo')} geometry={twitterGeometry}>
+        <mesh position={[0, 4, 0]} onClick={() => router.push("https://twitter.com/SarabiaProject")} geometry={twitterGeometry}>
           <meshMatcapMaterial matcap={matcap} />
         </mesh>
-        <mesh position={[0, 2, 0]} onClick={() => console.log('sapo')} geometry={instagramGeometry}>
+        <mesh position={[0, 2, 0]} onClick={() => router.push("https://www.instagram.com/sarabiaproject/")} geometry={instagramGeometry}>
           <meshMatcapMaterial matcap={matcap} />
         </mesh>
-        <mesh position={[0, 0, 0]} onClick={() => console.log('sapo')} geometry={youtubeGeometry}>
+        <mesh position={[0, 0, 0]} onClick={() => router.push("https://www.youtube.com/@sarabiaproject")} geometry={youtubeGeometry}>
           <meshMatcapMaterial matcap={matcap} />
         </mesh>
-        <mesh position={[0, -2, 0]} onClick={() => console.log('sapo')} geometry={tiktokGeometry}>
+        <mesh position={[0, -2, 0]} onClick={() => router.push("https://www.tiktok.com/@sarabiaproject")} geometry={tiktokGeometry}>
           <meshMatcapMaterial matcap={matcap} />
         </mesh>
 
@@ -181,7 +185,7 @@ export default function Home() {
       </Head>
 
       <div className="scene">
-        <Canvas shadows dpr={[1, 2]} camera={{ position: [0, 0, 5], fov: 75,  }}>
+        <Canvas shadows dpr={[1, 2]} camera={{ position: [0, 0, 6], fov: 75,  }}>
           <ambientLight intensity={0.7} />
           <spotLight intensity={0.5} angle={0.1} penumbra={1} position={[10, 15, 10]} castShadow />
           <Suspense fallback={null}>
