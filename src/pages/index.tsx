@@ -194,7 +194,7 @@ export default function Home() {
             
             {/* To add environment effect to the model */}
             <Environment preset="city" />
-            <RandomGeometries />
+            {RandomGeometries()}
           </Suspense>
           <OrbitControls maxDistance={10} minDistance={3} autoRotate />
         </Canvas>
