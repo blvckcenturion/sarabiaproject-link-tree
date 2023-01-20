@@ -147,16 +147,16 @@ const Scene = ({ showLinks }: { showLinks: boolean }) => {
   const Links = () => { 
     return (
       <>
-        <mesh position={[0, 4, 0]} onClick={() => router.push("https://twitter.com/SarabiaProject")} geometry={twitterGeometry}>
+        <mesh position={[0, 5, 0]} onClick={() => router.push("https://twitter.com/SarabiaProject")} geometry={twitterGeometry}>
           <meshMatcapMaterial matcap={matcap} />
         </mesh>
-        <mesh position={[0, 2, 0]} onClick={() => router.push("https://www.instagram.com/sarabiaproject/")} geometry={instagramGeometry}>
+        <mesh position={[0, 2.5, 0]} onClick={() => router.push("https://www.instagram.com/sarabiaproject/")} geometry={instagramGeometry}>
           <meshMatcapMaterial matcap={matcap} />
         </mesh>
         <mesh position={[0, 0, 0]} onClick={() => router.push("https://www.youtube.com/@sarabiaproject")} geometry={youtubeGeometry}>
           <meshMatcapMaterial matcap={matcap} />
         </mesh>
-        <mesh position={[0, -2, 0]} onClick={() => router.push("https://www.tiktok.com/@sarabiaproject")} geometry={tiktokGeometry}>
+        <mesh position={[0, -2.5, 0]} onClick={() => router.push("https://www.tiktok.com/@sarabiaproject")} geometry={tiktokGeometry}>
           <meshMatcapMaterial matcap={matcap} />
         </mesh>
 
