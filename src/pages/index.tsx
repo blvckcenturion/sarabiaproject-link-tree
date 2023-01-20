@@ -51,7 +51,7 @@ const Scene = ({ showLinks }: { showLinks: boolean }) => {
         setTextSize(basicCalc / 200)
       } else {
         setTitleSize(basicCalc / 200) 
-        setTextSize(basicCalc / 100)
+        setTextSize(basicCalc / 120)
       }
     }
     
@@ -210,7 +210,7 @@ export default function Home() {
       </Head>
 
       <div className="scene">
-        <Canvas shadows dpr={[1, 2]} camera={{ position: [0, 0, 6], fov: 75, }}>
+        <Canvas shadows dpr={[1, 2]} camera={{ position: [0, 0, 6], fov: 80, }}>
           <ambientLight intensity={0.7} />
           <spotLight intensity={0.5} angle={0.1} penumbra={1} position={[10, 15, 10]} castShadow />
           <Scene showLinks={showLinks} />
