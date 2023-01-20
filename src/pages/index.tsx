@@ -33,6 +33,7 @@ const Scene = ({ showLinks }: { showLinks: boolean }) => {
 
   const { width, height } = useWindowSize()
 
+  const [titleSize, setTitleSize] = useState<any>(null)
   const [textSize, setTextSize] = useState<any>(null)
 
   const [matcap, setMatcap] = useState<any>(null)
@@ -40,12 +41,17 @@ const Scene = ({ showLinks }: { showLinks: boolean }) => {
   useEffect(() => {
 
     if (width != undefined && height != undefined) { 
+      const basicCalc = 0.00025 * (width * height) 
+
       if ((width * height) / 500 > 2000) {
-        setTextSize(0.00025 * (width * height) / 1000)
+        setTitleSize(basicCalc/ 1000)
+        setTextSize(basicCalc / 800)
       } else if ((width * height) / 500 > 1500) { 
-        setTextSize(0.00025 * (width * height)/400)
+        setTitleSize(basicCalc/400)
+        setTextSize(basicCalc / 300)
       } else {
-        setTextSize(0.00025 * (width * height)/200) 
+        setTitleSize(basicCalc / 200) 
+        setTextSize(basicCalc / 150)
       }
     }
     
@@ -105,7 +111,7 @@ const Scene = ({ showLinks }: { showLinks: boolean }) => {
 
   const font = new FontLoader().parse(g);
 
-  const generateTextGeometry = (text : string) => {
+  const generateTextGeometry = (text : string, textSize: number) => {
       
     const myGeometry = new TextGeometry(text, {
       font: font,
@@ -124,11 +130,11 @@ const Scene = ({ showLinks }: { showLinks: boolean }) => {
     return myGeometry
   }
 
-  const titleGeometry = generateTextGeometry("SARABIA \nPROJECT")
-  const twitterGeometry = generateTextGeometry("TWITTER")
-  const instagramGeometry = generateTextGeometry("INSTAGRAM")
-  const youtubeGeometry = generateTextGeometry("YOUTUBE")
-  const tiktokGeometry = generateTextGeometry("TIKTOK")
+  const titleGeometry = generateTextGeometry("SARABIA \nPROJECT", titleSize)
+  const twitterGeometry = generateTextGeometry("TWITTER", textSize)
+  const instagramGeometry = generateTextGeometry("INSTAGRAM", textSize)
+  const youtubeGeometry = generateTextGeometry("YOUTUBE", textSize)
+  const tiktokGeometry = generateTextGeometry("TIKTOK", textSize)
 
   const Index = () => {
     return (
@@ -215,7 +221,7 @@ export default function Home() {
       </div>
       <div className='action'>
         <button onClick={() => { setShowLinks(!showLinks);setPosition([0,0,10]) }}>
-          {showLinks ? "Volver atras." : "Visita mis links."}
+          {showLinks ? "Volver atras." : "Ver links."}
         </button>
       </div>
     </div>

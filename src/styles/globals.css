@@ -134,10 +134,9 @@ body {
 
 .action {
   position: absolute;
-  top: 85%;
+  top: 90%;
   left: 50%;
   transform: translate(-50%, -50%);
-  
   background-color: transparent;
   z-index: 3;
 }
