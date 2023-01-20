@@ -50,8 +50,8 @@ const Scene = ({ showLinks }: { showLinks: boolean }) => {
         setTitleSize(basicCalc/400)
         setTextSize(basicCalc / 200)
       } else {
-        setTitleSize(basicCalc / 200) 
-        setTextSize(basicCalc / 100)
+        setTitleSize(basicCalc / 100) 
+        setTextSize(basicCalc / 50)
       }
     }
     
@@ -159,8 +159,6 @@ const Scene = ({ showLinks }: { showLinks: boolean }) => {
         <mesh position={[0, -2.5, 0]} onClick={() => router.push("https://www.tiktok.com/@sarabiaproject")} geometry={tiktokGeometry}>
           <meshMatcapMaterial matcap={matcap} />
         </mesh>
-
-        
       </>
     )
   }
