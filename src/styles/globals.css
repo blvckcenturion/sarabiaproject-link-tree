@@ -158,6 +158,24 @@ body {
   color: #fff;
   font-family: 'Roboto Mono', monospace;
   padding: 15px;
+  animation: appear 5s ease;
+}
+
+@keyframes appear { 
+  0% { 
+    opacity: 0; 
+    transform: scale(0)
+  } 
+
+  75% { 
+    opacity: 0; 
+    transform: scale(0.5);
+  }
+
+  100% { 
+    opacity: 1; 
+    transform: scale(1);
+  } 
 }
 
 .action button:hover {
