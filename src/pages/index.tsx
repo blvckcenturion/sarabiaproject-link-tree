@@ -50,8 +50,8 @@ const Scene = ({ showLinks }: { showLinks: boolean }) => {
         setTitleSize(basicCalc/400)
         setTextSize(basicCalc / 200)
       } else {
-        setTitleSize(basicCalc / 100) 
-        setTextSize(basicCalc / 50)
+        setTitleSize(basicCalc / 200) 
+        setTextSize(basicCalc / 100)
       }
     }
     
