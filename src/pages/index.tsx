@@ -45,13 +45,13 @@ const Scene = ({ showLinks }: { showLinks: boolean }) => {
 
       if ((width * height) / 500 > 2000) {
         setTitleSize(basicCalc/ 1000)
-        setTextSize(basicCalc / 800)
+        setTextSize(basicCalc / 700)
       } else if ((width * height) / 500 > 1500) { 
         setTitleSize(basicCalc/400)
-        setTextSize(basicCalc / 300)
+        setTextSize(basicCalc / 200)
       } else {
         setTitleSize(basicCalc / 200) 
-        setTextSize(basicCalc / 150)
+        setTextSize(basicCalc / 100)
       }
     }
     
