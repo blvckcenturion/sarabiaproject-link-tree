@@ -1,15 +1,13 @@
 import Head from 'next/head'
-import { Suspense, useEffect, useState } from "react"
-import { Canvas } from "@react-three/fiber"
+import { Suspense, useEffect, useRef, useState } from "react"
+import { Canvas, useThree, useFrame, extend } from "@react-three/fiber"
 import { Environment, OrbitControls } from "@react-three/drei"
 import * as THREE from 'three'
-import { extend } from '@react-three/fiber'
 import { FontLoader } from "three/examples/jsm/loaders/FontLoader"
 import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry"
 import g from "../../public/assets/fonts/G-Display.json"
 import useWindowSize from 'hooks/useWindowSize'
 import { useRouter } from 'next/router'
-
 
 extend({TextGeometry})
 
@@ -26,6 +24,7 @@ export default function Home() {
 
   const [showLinks, setShowLinks] = useState(false)
 
+  const [cameraPos, setCameraPos] = useState(new THREE.Vector3(0, 0, 6))
 
   useEffect(() => {
 
@@ -185,7 +184,8 @@ export default function Home() {
       </Head>
 
       <div className="scene">
-        <Canvas shadows dpr={[1, 2]} camera={{ position: [0, 0, 6], fov: 75,  }}>
+        <Canvas shadows dpr={[1, 2]} camera={{ position: [0, 0, 6], fov: 75, }}>
+          <>
           <ambientLight intensity={0.7} />
           <spotLight intensity={0.5} angle={0.1} penumbra={1} position={[10, 15, 10]} castShadow />
           <Suspense fallback={null}>
@@ -195,16 +195,16 @@ export default function Home() {
             {/* To add environment effect to the model */}
             <Environment preset="city" />
             {RandomGeometries()}
-          </Suspense>
-          <OrbitControls maxDistance={10} minDistance={3} autoRotate />
+                </Suspense>
+            <OrbitControls maxDistance={10} minDistance={3} autoRotate={!showLinks} />
+          </>
         </Canvas>
       </div>
       <div className='action'>
-        <button onClick={() => setShowLinks(!showLinks)}>
+        <button onClick={() => { setShowLinks(!showLinks); }}>
           {showLinks ? "Volver atras." : "Visita mis links."}
         </button>
       </div>
-
     </div>
   )
 }
