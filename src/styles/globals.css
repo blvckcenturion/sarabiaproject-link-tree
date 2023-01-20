@@ -134,7 +134,7 @@ body {
 
 .action {
   position: absolute;
-  top: 80%;
+  top: 85%;
   left: 50%;
   transform: translate(-50%, -50%);
   
@@ -150,8 +150,12 @@ body {
   font-size: 1rem;
   font-weight: 600;
   transition: all 1s ease;
-  background-color: transparent;
-  border: 2px solid #fff;
+  background: rgba(108, 108, 108, 0.21);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(4.4px);
+  -webkit-backdrop-filter: blur(4.4px);
+  border: 1px solid rgba(108, 108, 108, 0.3);
   color: #fff;
   font-family: 'Roboto Mono', monospace;
   padding: 15px;

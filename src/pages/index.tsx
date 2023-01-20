@@ -8,23 +8,34 @@ import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry"
 import g from "../../public/assets/fonts/G-Display.json"
 import useWindowSize from 'hooks/useWindowSize'
 import { useRouter } from 'next/router'
+import { create } from 'zustand'
+
 
 extend({TextGeometry})
 
+const useStore = create(set => ({
+  position: [0, 0, 6],
+  setPosition: (position : any) => set({ position })
+}))
 
-export default function Home() {
+const Scene = ({ showLinks }: { showLinks: boolean }) => {
 
   const router = useRouter()
+  
+  const [x, y, z] = useStore((state : any) => state.position)
+  useFrame(state => {
+    if (showLinks) {
+      state.camera.position.lerp(new THREE.Vector3(x, y, z), 0.1)
+      state.camera.lookAt(0, 0, 0)
+    }
+    
+  })
 
   const { width, height } = useWindowSize()
 
   const [textSize, setTextSize] = useState<any>(null)
 
   const [matcap, setMatcap] = useState<any>(null)
-
-  const [showLinks, setShowLinks] = useState(false)
-
-  const [cameraPos, setCameraPos] = useState(new THREE.Vector3(0, 0, 6))
 
   useEffect(() => {
 
@@ -51,14 +62,8 @@ export default function Home() {
   const generatePosition = () => { 
     let pos = new THREE.Vector3(Math.random() * 20 - 10, Math.random() * 20 - 10, Math.random() * 20 - 10)
 
-    if (!showLinks) { 
-      while (pos.x < 2 && pos.x > -2 && pos.y < 2 && pos.y > -2 && pos.z < 2 && pos.z > -2) {
-        pos = new THREE.Vector3(Math.random() * 20 - 10, Math.random() * 20 - 10, Math.random() * 20 - 10)
-      }
-    } else {
-      while (pos.x < 4 && pos.x > -4 && pos.y < 5 && pos.y > -5 && pos.z < 4 && pos.z > -4) {
-        pos = new THREE.Vector3(Math.random() * 20 - 10, Math.random() * 20 - 10, Math.random() * 20 - 10)
-      }
+    while (pos.x < 3 && pos.x > -3 && pos.y < 3 && pos.y > -3 && pos.z < 3 && pos.z > -3) {
+      pos = new THREE.Vector3(Math.random() * 20 - 10, Math.random() * 20 - 10, Math.random() * 20 - 10)
     }
     
     return pos
@@ -118,7 +123,6 @@ export default function Home() {
 
     return myGeometry
   }
-  
 
   const titleGeometry = generateTextGeometry("SARABIA \nPROJECT")
   const twitterGeometry = generateTextGeometry("TWITTER")
@@ -126,14 +130,11 @@ export default function Home() {
   const youtubeGeometry = generateTextGeometry("YOUTUBE")
   const tiktokGeometry = generateTextGeometry("TIKTOK")
 
-
   const Index = () => {
     return (
-      <>
       <mesh position={[0, (width != undefined ? width > height ? 0 : 1 : 1), 0]} onClick={() => console.log('sapo')} geometry={titleGeometry}>
         <meshMatcapMaterial matcap={matcap} />
       </mesh>
-      </>
     )
   }
 
@@ -158,6 +159,27 @@ export default function Home() {
     )
   }
 
+
+  return (
+    <Suspense fallback={null}>
+      {/* <Model /> */}
+      {showLinks ? <Links /> : <Index />}
+      
+      {/* To add environment effect to the model */}
+      <Environment preset="city" />
+      {!showLinks && RandomGeometries()}
+    </Suspense>
+  )
+
+  
+}
+
+
+export default function Home() {
+
+  const [showLinks, setShowLinks] = useState(false)
+
+  const setPosition = useStore((state: any) => state.setPosition)
 
   return (
     <div>
@@ -185,23 +207,14 @@ export default function Home() {
 
       <div className="scene">
         <Canvas shadows dpr={[1, 2]} camera={{ position: [0, 0, 6], fov: 75, }}>
-          <>
           <ambientLight intensity={0.7} />
           <spotLight intensity={0.5} angle={0.1} penumbra={1} position={[10, 15, 10]} castShadow />
-          <Suspense fallback={null}>
-            {/* <Model /> */}
-            {showLinks ? <Links /> : <Index />}
-            
-            {/* To add environment effect to the model */}
-            <Environment preset="city" />
-            {RandomGeometries()}
-                </Suspense>
-            <OrbitControls maxDistance={10} minDistance={3} autoRotate={!showLinks} />
-          </>
+          <Scene showLinks={showLinks} />
+          <OrbitControls maxDistance={10} minDistance={3} autoRotate={!showLinks} />
         </Canvas>
       </div>
       <div className='action'>
-        <button onClick={() => { setShowLinks(!showLinks); }}>
+        <button onClick={() => { setShowLinks(!showLinks);setPosition([0,0,10]) }}>
           {showLinks ? "Volver atras." : "Visita mis links."}
         </button>
       </div>
