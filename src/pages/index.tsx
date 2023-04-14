@@ -130,15 +130,16 @@ const Scene = ({ showLinks }: { showLinks: boolean }) => {
     return myGeometry
   }
 
-  const titleGeometry = generateTextGeometry("SARABIA \nPROJECT", titleSize)
+  const titleGeometry = generateTextGeometry("SANTIAGO \nSARABIA", titleSize)
   const twitterGeometry = generateTextGeometry("TWITTER", textSize)
   const instagramGeometry = generateTextGeometry("INSTAGRAM", textSize)
   const youtubeGeometry = generateTextGeometry("YOUTUBE", textSize)
-  const tiktokGeometry = generateTextGeometry("TIKTOK", textSize)
+  const githubGeometry = generateTextGeometry("GITHUB", textSize)
+  const linkedInGeometry = generateTextGeometry("LINKEDIN", textSize)
 
   const Index = () => {
     return (
-      <mesh position={[0, (width != undefined ? width > height ? 0 : 1 : 1), 0]} onClick={() => console.log('sapo')} geometry={titleGeometry}>
+      <mesh position={[0, (width != undefined ? width > height ? 0 : 1 : 1), 0]} geometry={titleGeometry}>
         <meshMatcapMaterial matcap={matcap} />
       </mesh>
     )
@@ -147,7 +148,7 @@ const Scene = ({ showLinks }: { showLinks: boolean }) => {
   const Links = () => { 
     return (
       <>
-        <mesh position={[0, 5, 0]} onClick={() => router.push("https://twitter.com/SarabiaProject")} geometry={twitterGeometry}>
+        <mesh position={[0, 5, 0]} onClick={() => router.push("https://twitter.com/blvckcenturion")} geometry={twitterGeometry}>
           <meshMatcapMaterial matcap={matcap} />
         </mesh>
         <mesh position={[0, 2.5, 0]} onClick={() => router.push("https://www.instagram.com/sarabiaproject/")} geometry={instagramGeometry}>
@@ -156,7 +157,10 @@ const Scene = ({ showLinks }: { showLinks: boolean }) => {
         <mesh position={[0, 0, 0]} onClick={() => router.push("https://www.youtube.com/@sarabiaproject")} geometry={youtubeGeometry}>
           <meshMatcapMaterial matcap={matcap} />
         </mesh>
-        <mesh position={[0, -2.5, 0]} onClick={() => router.push("https://www.tiktok.com/@sarabiaproject")} geometry={tiktokGeometry}>
+        <mesh position={[0, -2.5, 0]} onClick={() => router.push("https://github.com/blvckcenturion")} geometry={githubGeometry}>
+          <meshMatcapMaterial matcap={matcap} />
+        </mesh>
+        <mesh position={[0, 5, 0]} onClick={() => router.push("https://www.linkedin.com/in/santiagosarabia")} geometry={linkedInGeometry}>
           <meshMatcapMaterial matcap={matcap} />
         </mesh>
       </>
